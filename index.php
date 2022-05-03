@@ -36,6 +36,7 @@
 
         while($i < sizeof($array))
         {
+
             if(sizeof($array) === 1)
                 return true;
 
@@ -52,27 +53,57 @@
                 {
                     if(isset($array[$i-1]))
                     {
-                        if($array[$i-1] == $array[$i+1])
+                        if($array[$i-1] == $array[$i+1] || ($array[$i] == $array[$i+1]))
                             array_splice($array,$i+1,1);
+
+                        else if($array[$i-1] < $array[$i+1])
+                            array_splice($array,$i,1);
+
+                        else
+                            array_splice($array,$i+1,1);
+
+                        $elementos_removidos++;
+
+                        $i= 0;
+
+                        continue;
                     }
+                    
 
                     array_splice($array,$i,1);
                     $elementos_removidos++;
-                    $i = -1;
+                    $i=0;
+                    continue;
                 }
             }
              $i++;
         }
         return true;
     }
+    /**
+     * Teste Array Individualmente
+     * 
+     *  if(sequenciaCrescenete([10, 1, 2, 3, 4, 5]))
+            echo " --- TRUE";
+        else
+            echo " --- FALSE";
+     * */
 
+    /**
+     * Teste de todos os Array da questão
+     * */
+    
     foreach($mts_arrays as $a)
     {
-        echo array_search($a,$mts_arrays);
+        echo "Teste das Tarefas esperado: ".array_search($a,$mts_arrays);
+
+        echo "<br> Retorno do Codigo: ";
 
         if(sequenciaCrescenete($a))
             echo " --- TRUE";
         else
             echo " --- FALSE";
+
         echo "<hr>";
     }
+?>
